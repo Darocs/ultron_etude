@@ -17,7 +17,7 @@ class UltronUiObject2ScrollTest : BaseTest() {
         @BeforeClass
         @JvmStatic
         fun speedUpAutomator() {
-            UltronConfig.UiAutomator.speedUp()
+            com.atiurin.ultron.core.config.UltronConfig.UiAutomator.speedUp()
         }
     }
 

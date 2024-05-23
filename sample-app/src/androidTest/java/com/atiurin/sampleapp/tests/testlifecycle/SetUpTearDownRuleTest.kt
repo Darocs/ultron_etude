@@ -16,8 +16,8 @@ class SetUpTearDownRuleTest {
     val conditionsOrderMap = mutableMapOf<Int, String>()
 
     init {
-        UltronConfig.Conditions.conditionExecutorWrapper = CustomConditionExecutorWrapper()
-        UltronConfig.Conditions.conditionsExecutor = CustomConditionsExecutor()
+        com.atiurin.ultron.core.config.UltronConfig.Conditions.conditionExecutorWrapper = CustomConditionExecutorWrapper()
+        com.atiurin.ultron.core.config.UltronConfig.Conditions.conditionsExecutor = CustomConditionsExecutor()
     }
 
     class CustomConditionExecutorWrapper : ConditionExecutorWrapper {

@@ -97,7 +97,7 @@ class EspressoWebUiElementsTest : BaseWebViewTest() {
     @Test
     fun webViewFinderTest() {
         val jsTitleNew = "JS_TITLE_NEW"
-        UltronConfig.Espresso.webViewMatcher = withId(R.id.webview)
+        com.atiurin.ultron.core.config.UltronConfig.Espresso.webViewMatcher = withId(R.id.webview)
         evalJS("document.getElementById(\"title\").innerHTML = '$jsTitleNew';")
         className("css_title").containsText(jsTitleNew)
     }

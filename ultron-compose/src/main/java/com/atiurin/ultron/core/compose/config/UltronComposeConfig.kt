@@ -14,7 +14,6 @@ import com.atiurin.ultron.exceptions.UltronException
 import com.atiurin.ultron.exceptions.UltronWrapperException
 import com.atiurin.ultron.listeners.LogLifecycleListener
 import com.atiurin.ultron.listeners.UltronLifecycleListener
-import com.atiurin.ultron.log.UltronLog
 
 object UltronComposeConfig {
     const val DEFAULT_LAZY_COLUMN_OPERATIONS_TIMEOUT = 10_000L
@@ -64,7 +63,7 @@ object UltronComposeConfig {
 
     private fun modify() {
         addListener(LogLifecycleListener())
-        UltronConfig.operationsExcludedFromListeners.addAll(listOf(ComposeOperationType.GET_LIST_ITEM, ComposeOperationType.GET_LIST_ITEM_CHILD))
+        com.atiurin.ultron.core.config.UltronConfig.operationsExcludedFromListeners.addAll(listOf(ComposeOperationType.GET_LIST_ITEM, ComposeOperationType.GET_LIST_ITEM_CHILD))
         UltronLog.info("UltronComposeConfig applied with params $params}")
     }
 

@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ultron"))
+    implementation(project(":ultron-android"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.androidXRunner)
     api(Libs.composeUiTest)

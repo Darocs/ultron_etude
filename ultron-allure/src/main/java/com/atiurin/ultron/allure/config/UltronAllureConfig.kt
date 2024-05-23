@@ -3,7 +3,6 @@ package com.atiurin.ultron.allure.config
 import android.os.Environment
 import androidx.test.platform.app.InstrumentationRegistry
 import com.atiurin.ultron.allure.attachment.AllureDirectoryUtil
-import com.atiurin.ultron.allure.attachment.AttachUtil
 import com.atiurin.ultron.allure.condition.AllureConditionExecutorWrapper
 import com.atiurin.ultron.allure.condition.AllureConditionsExecutor
 import com.atiurin.ultron.allure.getRunInformer
@@ -19,7 +18,6 @@ import com.atiurin.ultron.allure.runner.WindowHierarchyAttachRunListener
 import com.atiurin.ultron.core.config.UltronConfig
 import com.atiurin.ultron.extensions.simpleClassName
 import com.atiurin.ultron.listeners.AbstractListener
-import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.runner.UltronRunListener
 import java.io.File
 

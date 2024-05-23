@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ultron"))
+    implementation(project(":ultron-android"))
     implementation(project(":ultron-compose"))
     implementation(project(":ultron-allure"))
     implementation(Libs.kotlinStdlib)

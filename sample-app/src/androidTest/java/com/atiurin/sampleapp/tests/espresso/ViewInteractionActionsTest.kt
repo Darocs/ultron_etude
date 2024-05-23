@@ -20,11 +20,9 @@ import com.atiurin.ultron.custom.espresso.action.getText
 import com.atiurin.ultron.custom.espresso.assertion.hasAnyDrawable
 import com.atiurin.ultron.custom.espresso.assertion.hasDrawable
 import com.atiurin.ultron.extensions.*
-import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.utils.getTargetString
 import org.junit.Assert
 import org.junit.Test
-import kotlin.system.measureTimeMillis
 
 class ViewInteractionActionsTest : UiElementsTest() {
     val page = UiElementsPage
@@ -34,7 +32,7 @@ class ViewInteractionActionsTest : UiElementsTest() {
         val startTime = SystemClock.elapsedRealtime()
         val result = page.notExistElement.isSuccess { isDisplayed() }
         val endTime = SystemClock.elapsedRealtime()
-        Assert.assertTrue(endTime - startTime >= UltronConfig.Espresso.ASSERTION_TIMEOUT)
+        Assert.assertTrue(endTime - startTime >= com.atiurin.ultron.core.config.UltronConfig.Espresso.ASSERTION_TIMEOUT)
         Assert.assertFalse(result)
     }
 
