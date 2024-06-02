@@ -20,6 +20,7 @@ import com.atiurin.ultron.core.common.options.ContentDescriptionContainsOption
 import com.atiurin.ultron.core.common.options.TextContainsOption
 import com.atiurin.ultron.core.compose.createUltronComposeRule
 import com.atiurin.ultron.core.compose.list.composeList
+import com.atiurin.ultron.core.compose.list.onVisibleItemChild
 import com.atiurin.ultron.extensions.assertIsDisplayed
 import com.atiurin.ultron.extensions.assertTextEquals
 import com.atiurin.ultron.extensions.click

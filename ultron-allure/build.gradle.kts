@@ -31,6 +31,7 @@ android {
 }
 dependencies {
     implementation(project(":ultron-android"))
+    implementation(project(":ultron-common"))
     implementation(Libs.kotlinStdlib)
     api(Libs.allureAndroid)
     api(Libs.allureCommon)

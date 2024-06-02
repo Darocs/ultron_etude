@@ -18,6 +18,7 @@ import com.atiurin.ultron.allure.runner.WindowHierarchyAttachRunListener
 import com.atiurin.ultron.core.config.UltronConfig
 import com.atiurin.ultron.extensions.simpleClassName
 import com.atiurin.ultron.listeners.AbstractListener
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.runner.UltronRunListener
 import java.io.File
 
@@ -109,6 +110,6 @@ object UltronAllureConfig {
 
     fun <T : AbstractListener> removeRunListener(listenerClass: Class<T>) {
         UltronLog.info("Remove ${listenerClass.simpleClassName()} run listener")
-        InstrumentationRegistry.getInstrumentation().getRunInformer().removeListener(listenerClass)
+        InstrumentationRegistry.getInstrumentation().getRunInformer().removeListener(listenerClass.kotlin)
     }
 }

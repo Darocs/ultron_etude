@@ -3,6 +3,7 @@ package com.atiurin.ultron.allure.hierarchy
 import com.atiurin.ultron.allure.attachment.AttachUtil
 import com.atiurin.ultron.hierarchy.HierarchyDumper
 import com.atiurin.ultron.hierarchy.UiDeviceHierarchyDumper
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.utils.createCacheFile
 
 class AllureHierarchyDumper {

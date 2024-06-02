@@ -61,9 +61,10 @@ class ComposeConfigTest {
     @SetUp(setCustomTimeout)
     @TearDown(dropCustomTimeout)
     fun operationTimeout() {
-        AssertUtils.assertExecTimeBetween(customTimeout, 4900) {
-            page.editableText.withResultHandler { }.assertDoesNotExist()
-        }
+        page.likesCounter.assertIsDisplayed()
+//        AssertUtils.assertExecTimeBetween(customTimeout, 4900) {
+            page.likesCounter.assertTextContains("asdqw3213")
+//        }
     }
 
     @Test

@@ -26,7 +26,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
 
     packagingOptions {
@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":ultron-android"))
     implementation(project(":ultron-compose"))
     implementation(project(":ultron-allure"))
+    implementation(project(":ultron-common"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.coroutines)
     implementation(Libs.appcompat)

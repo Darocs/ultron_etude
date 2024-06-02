@@ -1,6 +1,7 @@
 package com.atiurin.ultron.allure.screenshot
 
 import com.atiurin.ultron.allure.attachment.AttachUtil
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.screenshot.Screenshoter
 import com.atiurin.ultron.screenshot.UiAutomationScreenshoter
 import com.atiurin.ultron.screenshot.ViewScreenshoter

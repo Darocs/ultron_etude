@@ -1,6 +1,7 @@
 package com.atiurin.ultron.allure.runner
 
 import com.atiurin.ultron.extensions.createDirectoryIfNotExists
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.runner.UltronRunListener
 import org.junit.runner.Result
 import java.io.File

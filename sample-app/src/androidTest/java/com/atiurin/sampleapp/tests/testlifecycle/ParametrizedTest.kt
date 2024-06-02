@@ -2,6 +2,7 @@ package com.atiurin.sampleapp.tests.testlifecycle
 
 import com.atiurin.sampleapp.activity.ComposeElementsActivity
 import com.atiurin.ultron.core.compose.createUltronComposeRule
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.testlifecycle.rulesequence.RuleSequence
 import com.atiurin.ultron.testlifecycle.setupteardown.SetUp
 import com.atiurin.ultron.testlifecycle.setupteardown.SetUpRule

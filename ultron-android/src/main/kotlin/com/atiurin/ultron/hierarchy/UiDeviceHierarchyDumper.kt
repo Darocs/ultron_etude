@@ -1,6 +1,7 @@
 package com.atiurin.ultron.hierarchy
 
 import com.atiurin.ultron.core.config.UltronConfig.UiAutomator.Companion.uiDevice
+import com.atiurin.ultron.log.UltronLog
 import java.io.File
 
 class UiDeviceHierarchyDumper : HierarchyDumper {

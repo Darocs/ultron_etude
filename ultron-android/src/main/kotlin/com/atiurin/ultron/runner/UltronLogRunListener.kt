@@ -1,6 +1,8 @@
 package com.atiurin.ultron.runner
 
 import com.atiurin.ultron.extensions.fullTestName
+import com.atiurin.ultron.log.LogLevel
+import com.atiurin.ultron.log.UltronLogUtil.logTextBlock
 import org.junit.runner.Description
 import org.junit.runner.Result
 import org.junit.runner.notification.Failure

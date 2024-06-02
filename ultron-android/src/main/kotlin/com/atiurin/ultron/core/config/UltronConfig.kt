@@ -37,10 +37,12 @@ import com.atiurin.ultron.exceptions.UltronException
 import com.atiurin.ultron.exceptions.UltronOperationException
 import com.atiurin.ultron.exceptions.UltronUiAutomatorException
 import com.atiurin.ultron.exceptions.UltronWrapperException
+import com.atiurin.ultron.extensions.simpleClassName
 import com.atiurin.ultron.listeners.LogLifecycleListener
 import com.atiurin.ultron.listeners.UltronLifecycleListener
-import com.atiurin.ultron.log.UltronFileLogger
+import com.atiurin.ultron.log.UltronFileLoggerImpl
 import com.atiurin.ultron.log.UltronLog
+import com.atiurin.ultron.log.getFileLogger
 import com.atiurin.ultron.testlifecycle.setupteardown.ConditionExecutorWrapper
 import com.atiurin.ultron.testlifecycle.setupteardown.ConditionsExecutor
 import com.atiurin.ultron.testlifecycle.setupteardown.DefaultConditionExecutorWrapper
@@ -51,18 +53,18 @@ import org.hamcrest.Matcher
 import kotlin.reflect.KClass
 
 object UltronConfig {
-    var LOGCAT_TAG = "Ultron"
-    val operationsExcludedFromListeners =  UltronCommonConfig.operationsExcludedFromListeners.apply {
-        add(EspressoAssertionType.IDENTIFY_RECYCLER_VIEW)
+    init {
+        UltronCommonConfig.operationsExcludedFromListeners.apply {
+            add(EspressoAssertionType.IDENTIFY_RECYCLER_VIEW)
+        }
     }
 
-    var isListenersOn = UltronCommonConfig.isListenersOn
     const val DEFAULT_OPERATION_TIMEOUT_MS = 5_000L
 
     var params: UltronConfigParams = UltronConfigParams()
 
     fun addGlobalListener(lifecycleListener: UltronLifecycleListener) {
-        UltronLog.info("Add Ultron global listener ${lifecycleListener.javaClass.simpleName}. " +
+        UltronLog.info("Add Ultron global listener ${lifecycleListener.simpleClassName()}. " +
                 "It's applied for Espresso, EspressoWeb and UiAutomator operations.")
         UltronEspressoOperationLifecycle.addListener(lifecycleListener)
         UltronWebLifecycle.addListener(lifecycleListener)
@@ -85,7 +87,7 @@ object UltronConfig {
 
     class Log {
         companion object {
-            var dateFormat = "MM-dd HH:mm:ss.SSS"
+            var dateFormat = UltronCommonConfig.logDateFormat
         }
     }
 
@@ -94,9 +96,9 @@ object UltronConfig {
         Espresso.ASSERTION_TIMEOUT = params.operationTimeoutMs
         addGlobalListener(LogLifecycleListener())
         if (params.logToFile){
-            UltronLog.addLogger(UltronFileLogger())
+            UltronLog.addLogger(getFileLogger())
         } else {
-            UltronLog.removeLogger(UltronFileLogger())
+            UltronLog.removeLogger(UltronLog.fileLogger.id)
         }
         if (params.accelerateUiAutomator) {
             UiAutomator.speedUp()

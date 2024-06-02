@@ -7,12 +7,12 @@ plugins {
 
 kotlin {
     jvm()
-    wasm ()
+    wasmJs()
     js(IR) {}
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "17"
             }
         }
     }
@@ -32,9 +32,16 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.okio)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.atomicfu)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        val androidMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-jdk8"))
+                implementation(libs.androidx.monitor)
+            }
         }
         val jvmMain by getting {
             dependencies {
@@ -55,13 +62,16 @@ kotlin {
 }
 
 android {
-    namespace = "com.atiurin.ultron"
+    namespace = "com.atiurin.ultron.common"
     compileSdk = 34
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+}
+dependencies {
+    implementation(libs.androidx.monitor)
 }

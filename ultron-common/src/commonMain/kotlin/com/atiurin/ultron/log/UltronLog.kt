@@ -1,7 +1,11 @@
 package com.atiurin.ultron.log
 
+expect fun getFileLogger(): UltronFileLogger
+
+
 object UltronLog {
-    val fileLogger by lazy {  }
+    val fileLogger by lazy { getFileLogger() }
+
     private val loggers = mutableSetOf<ULogger>()
 
     fun addLogger(logger: ULogger) {
@@ -10,7 +14,11 @@ object UltronLog {
     }
 
     fun removeLogger(logger: ULogger){
-        val exist = loggers.find { it.id == logger.id }
+        removeLogger(logger.id)
+    }
+
+    fun removeLogger(id: String){
+        val exist = loggers.find { it.id == id }
         exist?.let { loggers.remove(it) }
     }
 

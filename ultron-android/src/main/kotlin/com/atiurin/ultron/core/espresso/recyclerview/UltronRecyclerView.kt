@@ -136,13 +136,11 @@ open class UltronRecyclerView(
         scrollOffset: Int = 0
     ): T {
         waitItemsLoaded()
-        val position = AssertUtils.assertTrueAndReturnValue<Int>(
-            { container ->
-                container.set(getItemAdapterPositionAtIndex(matcher, index))
-                container.get() >= 0
-            },
-            getTimeout(),
-            "RecyclerView($recyclerViewMatcher) has item matched '$matcher' with index $index"
+        val position = AssertUtils.assertTrueAndReturnValue(
+            valueBlock = { getItemAdapterPositionAtIndex(matcher, index) },
+            assertionBlock = { value -> value >= 0 },
+            timeoutMs = getTimeout(),
+            desc ="RecyclerView($recyclerViewMatcher) has item matched '$matcher' with index $index"
         )
         return UltronRecyclerViewItem.getInstance(this, position, autoScroll, scrollOffset)
     }
@@ -161,11 +159,11 @@ open class UltronRecyclerView(
         scrollOffset: Int = 0
     ): T {
         waitItemsLoaded()
-        val position = AssertUtils.assertTrueAndReturnValue<Int>(
-            { container ->
-                container.set(getItemsAdapterPositionList(matcher).lastOrNull() ?: -1)
-                container.get() >= 0
-            }, getTimeout(), "RecyclerView($recyclerViewMatcher) has last item matched '$matcher'"
+        val position = AssertUtils.assertTrueAndReturnValue(
+            valueBlock = {getItemsAdapterPositionList(matcher).lastOrNull() ?: -1 },
+            assertionBlock = { value -> value >= 0 },
+            timeoutMs = getTimeout(),
+            desc = "RecyclerView($recyclerViewMatcher) has last item matched '$matcher'"
         )
         return UltronRecyclerViewItem.getInstance(this, position, autoScroll, scrollOffset)
     }
@@ -226,13 +224,11 @@ open class UltronRecyclerView(
         scrollOffset: Int = 0
     ): UltronRecyclerViewItem {
         waitItemsLoaded()
-        val position = AssertUtils.assertTrueAndReturnValue<Int>(
-            { container ->
-                container.set(getItemAdapterPositionAtIndex(matcher, index))
-                container.get() >= 0
-            },
-            getTimeout(),
-            "RecyclerView($recyclerViewMatcher) has item matched '$matcher' with index $index"
+        val position = AssertUtils.assertTrueAndReturnValue(
+            valueBlock = { getItemAdapterPositionAtIndex(matcher, index) },
+            assertionBlock = { value -> value >= 0 },
+            timeoutMs = getTimeout(),
+            desc = "RecyclerView($recyclerViewMatcher) has item matched '$matcher' with index $index"
         )
         return UltronRecyclerViewItem(this, position, autoScroll, scrollOffset)
     }
@@ -251,11 +247,11 @@ open class UltronRecyclerView(
         scrollOffset: Int = 0
     ): UltronRecyclerViewItem {
         waitItemsLoaded()
-        val position = AssertUtils.assertTrueAndReturnValue<Int>(
-            { container ->
-                container.set(getItemsAdapterPositionList(matcher).lastOrNull() ?: -1)
-                container.get() >= 0
-            }, getTimeout(), "RecyclerView($recyclerViewMatcher) has last item matched '$matcher'"
+        val position = AssertUtils.assertTrueAndReturnValue(
+            valueBlock = { getItemsAdapterPositionList(matcher).lastOrNull() ?: -1 },
+            assertionBlock = { value -> value >= 0 },
+            timeoutMs = getTimeout(),
+            desc = "RecyclerView($recyclerViewMatcher) has last item matched '$matcher'"
         )
         return UltronRecyclerViewItem(this, position, autoScroll, scrollOffset)
     }

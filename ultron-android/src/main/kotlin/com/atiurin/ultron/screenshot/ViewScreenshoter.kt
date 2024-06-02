@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.os.Looper
 import android.view.View
 import com.atiurin.ultron.exceptions.UltronException
 import com.atiurin.ultron.file.MimeType
@@ -14,7 +13,6 @@ import com.atiurin.ultron.utils.runOnUiThread
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.concurrent.CountDownLatch
 
 class ViewScreenshoter(private val quality: Int = 90) : Screenshoter {
     val mimeType = MimeType.JPEG

@@ -2,6 +2,7 @@ package com.atiurin.ultron.allure.runner
 
 import com.atiurin.ultron.allure.attachment.AttachUtil
 import com.atiurin.ultron.file.MimeType
+import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.runner.UltronRunListener
 import com.atiurin.ultron.utils.createCacheFile
 import org.junit.runner.Description

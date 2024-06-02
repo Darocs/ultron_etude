@@ -1,18 +1,24 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
+    id("com.android.library")
+    id("kotlin-android")
+    id("com.vanniktech.maven.publish")
 }
 
 group = project.findProperty("GROUP")!!
 version =  project.findProperty("VERSION_NAME")!!
 
 android {
-    namespace = "com.atiurin.ultron"
+    namespace = "com.atiurin.ultron.android"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 16
-        targetSdk = 34
         multiDexEnabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
