@@ -6,6 +6,8 @@ import com.atiurin.ultron.core.common.OperationIterationResult
 import com.atiurin.ultron.core.common.ResultDescriptor
 import com.atiurin.ultron.core.config.UltronConfig.UiAutomator.Companion.UIAUTOMATOR_OPERATION_POLLING_TIMEOUT
 import com.atiurin.ultron.exceptions.UltronWrapperException
+import com.atiurin.ultron.extensions.isAssignedFrom
+import kotlin.reflect.KClass
 
 abstract class UiAutomatorOperationExecutor<T : Operation>(
     override val operation: T
@@ -42,5 +44,9 @@ abstract class UiAutomatorOperationExecutor<T : Operation>(
              """.trimMargin()
             )
         } else originalException
+    }
+
+    override fun isExceptionInList(exception: Throwable, exceptionClasses: List<KClass<out Throwable>>): Boolean {
+        return exception::class.java.isAssignedFrom(exceptionClasses.map { it.java })
     }
 }

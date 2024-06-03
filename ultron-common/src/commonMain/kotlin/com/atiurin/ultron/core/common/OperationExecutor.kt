@@ -49,7 +49,7 @@ interface OperationExecutor<Op : Operation, OpRes : OperationResult<Op>> {
         exceptionClasses: List<KClass<out Throwable>>
     ): Boolean {
         val exceptionClass = exception::class
-        return exceptionClasses.any { it.isInstance(exceptionClass) }
+        return exceptionClasses.any { it == exceptionClass }
     }
 
     fun execOperation(operationDuration: Long, previousResult: OpRes?): OpRes {

@@ -6,6 +6,9 @@ import com.atiurin.ultron.core.common.OperationExecutor
 import com.atiurin.ultron.core.common.OperationIterationResult
 import com.atiurin.ultron.core.common.ResultDescriptor
 import com.atiurin.ultron.core.config.UltronConfig.Espresso.Companion.ESPRESSO_OPERATION_POLLING_TIMEOUT
+import com.atiurin.ultron.extensions.getProperty
+import com.atiurin.ultron.extensions.isAssignedFrom
+import kotlin.reflect.KClass
 
 abstract class EspressoOperationExecutor<T : Operation>(
     override val operation: T
@@ -38,5 +41,9 @@ abstract class EspressoOperationExecutor<T : Operation>(
                 .includeViewHierarchy(com.atiurin.ultron.core.config.UltronConfig.Espresso.INCLUDE_VIEW_HIERARCHY_TO_EXCEPTION)
                 .build()
         } else originalException
+    }
+
+    override fun isExceptionInList(exception: Throwable, exceptionClasses: List<KClass<out Throwable>>): Boolean {
+        return exception::class.java.isAssignedFrom(exceptionClasses.map { it.java })
     }
 }

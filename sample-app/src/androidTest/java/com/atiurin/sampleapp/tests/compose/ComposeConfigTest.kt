@@ -33,10 +33,10 @@ class ComposeConfigTest {
     val page = ComposeElementsPage
     val composeRule = createUltronComposeRule<ComposeElementsActivity>()
     val setUpRule = SetUpRule().add(setCustomTimeout) { UltronComposeConfig.params.operationTimeoutMs = customTimeout }
-    val tearDownRule = TearDownRule().add(dropCustomTimeout){ UltronComposeConfig.params.operationTimeoutMs = UltronComposeConfig.DEFAULT_OPERATION_TIMEOUT}
+    val tearDownRule = TearDownRule().add(dropCustomTimeout) { UltronComposeConfig.params.operationTimeoutMs = UltronComposeConfig.DEFAULT_OPERATION_TIMEOUT }
 
     @get:Rule
-    val ruleSequence = RuleSequence().add(composeRule,setUpRule, tearDownRule)
+    val ruleSequence = RuleSequence().add(composeRule, setUpRule, tearDownRule)
 
 
     @Test
@@ -62,9 +62,9 @@ class ComposeConfigTest {
     @TearDown(dropCustomTimeout)
     fun operationTimeout() {
         page.likesCounter.assertIsDisplayed()
-//        AssertUtils.assertExecTimeBetween(customTimeout, 4900) {
+        AssertUtils.assertExecTimeBetween(customTimeout, 4900) {
             page.likesCounter.assertTextContains("asdqw3213")
-//        }
+        }
     }
 
     @Test

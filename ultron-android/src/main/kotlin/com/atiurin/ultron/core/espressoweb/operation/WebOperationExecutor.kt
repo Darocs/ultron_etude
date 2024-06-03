@@ -5,6 +5,8 @@ import com.atiurin.ultron.core.common.OperationExecutor
 import com.atiurin.ultron.core.common.OperationIterationResult
 import com.atiurin.ultron.core.config.UltronConfig
 import com.atiurin.ultron.exceptions.UltronWrapperException
+import com.atiurin.ultron.extensions.isAssignedFrom
+import kotlin.reflect.KClass
 
 internal abstract class WebOperationExecutor<T : Operation>(
     override val operation: T
@@ -38,5 +40,9 @@ internal abstract class WebOperationExecutor<T : Operation>(
                 UltronWrapperException("Element not found in WebView!", originalException)
         }
         return modifiedException ?: originalException
+    }
+
+    override fun isExceptionInList(exception: Throwable, exceptionClasses: List<KClass<out Throwable>>): Boolean {
+        return exception::class.java.isAssignedFrom(exceptionClasses.map { it.java })
     }
 }

@@ -40,7 +40,6 @@ import com.atiurin.ultron.exceptions.UltronWrapperException
 import com.atiurin.ultron.extensions.simpleClassName
 import com.atiurin.ultron.listeners.LogLifecycleListener
 import com.atiurin.ultron.listeners.UltronLifecycleListener
-import com.atiurin.ultron.log.UltronFileLoggerImpl
 import com.atiurin.ultron.log.UltronLog
 import com.atiurin.ultron.log.getFileLogger
 import com.atiurin.ultron.testlifecycle.setupteardown.ConditionExecutorWrapper
@@ -179,7 +178,7 @@ object UltronConfig {
                     PerformException::class.java,
                     NoMatchingViewException::class.java,
                     AssertionFailedError::class.java,
-                    AmbiguousViewMatcherException::class.java,
+                    AmbiguousViewMatcherException::class.java
                 )
                 val resultHandler: (EspressoOperationResult<UltronEspressoOperation>) -> Unit = {
                     resultAnalyzer.analyze(it)

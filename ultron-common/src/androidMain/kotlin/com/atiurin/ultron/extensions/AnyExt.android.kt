@@ -16,7 +16,7 @@ inline fun <reified T> Any.getMethodResult(methodName: String, vararg args: Any?
     } catch (ex: Throwable) { null }
 }
 
-internal fun Class<*>.isAssignedFrom(klasses: List<Class<*>>): Boolean{
+fun Class<*>.isAssignedFrom(klasses: List<Class<*>>): Boolean{
     klasses.forEach {
         if (it.isAssignableFrom(this)) return true
     }
