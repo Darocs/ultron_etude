@@ -5,6 +5,7 @@ import com.atiurin.ultron.core.common.Operation
 import com.atiurin.ultron.core.common.OperationExecutor
 import com.atiurin.ultron.core.common.OperationIterationResult
 import com.atiurin.ultron.core.common.ResultDescriptor
+import com.atiurin.ultron.core.config.UltronConfig
 import com.atiurin.ultron.core.config.UltronConfig.Espresso.Companion.ESPRESSO_OPERATION_POLLING_TIMEOUT
 import com.atiurin.ultron.extensions.getProperty
 import com.atiurin.ultron.extensions.isAssignedFrom
@@ -38,7 +39,7 @@ abstract class EspressoOperationExecutor<T : Operation>(
     override fun getWrapperException(originalException: Throwable): Throwable {
         return if (originalException is NoMatchingViewException) {
             NoMatchingViewException.Builder().from(originalException)
-                .includeViewHierarchy(com.atiurin.ultron.core.config.UltronConfig.Espresso.INCLUDE_VIEW_HIERARCHY_TO_EXCEPTION)
+                .includeViewHierarchy(UltronConfig.Espresso.INCLUDE_VIEW_HIERARCHY_TO_EXCEPTION)
                 .build()
         } else originalException
     }

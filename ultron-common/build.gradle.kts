@@ -7,6 +7,7 @@ plugins {
 
 kotlin {
     jvm()
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs()
     js(IR) {}
     androidTarget {
@@ -41,6 +42,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation(libs.androidx.monitor)
+                api(Libs.uiautomator)
+                api(Libs.junit)
             }
         }
         val jvmMain by getting {
@@ -71,7 +74,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-}
-dependencies {
-    implementation(libs.androidx.monitor)
 }

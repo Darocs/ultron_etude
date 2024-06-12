@@ -16,7 +16,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObjectNotFoundException
-import com.atiurin.ultron.config.UltronCommonConfig
 import com.atiurin.ultron.core.common.Operation
 import com.atiurin.ultron.core.common.OperationResult
 import com.atiurin.ultron.core.common.OperationResultAnalyzer
@@ -58,43 +57,29 @@ object UltronConfig {
         }
     }
 
-    const val DEFAULT_OPERATION_TIMEOUT_MS = 5_000L
+    @Deprecated(
+        message = "Default moved to UltronCommonConfig.Defaults",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.Defaults.OPERATION_TIMEOUT_MS")
+    )
+    val DEFAULT_OPERATION_TIMEOUT_MS = UltronCommonConfig.Defaults.OPERATION_TIMEOUT_MS
 
     var params: UltronConfigParams = UltronConfigParams()
 
-    fun addGlobalListener(lifecycleListener: UltronLifecycleListener) {
-        UltronLog.info("Add Ultron global listener ${lifecycleListener.simpleClassName()}. " +
-                "It's applied for Espresso, EspressoWeb and UiAutomator operations.")
-        UltronEspressoOperationLifecycle.addListener(lifecycleListener)
-        UltronWebLifecycle.addListener(lifecycleListener)
-        UltronUiAutomatorLifecycle.addListener(lifecycleListener)
+    fun applyRecommended() {
+        params = UltronConfigParams()
+        modify()
     }
 
-    fun removeGlobalListener(listenerId: String) {
-        UltronLog.info("Remove Ultron global listener with id ${listenerId}. ")
-        UltronEspressoOperationLifecycle.removeListener(listenerId)
-        UltronWebLifecycle.removeListener(listenerId)
-        UltronUiAutomatorLifecycle.removeListener(listenerId)
-    }
-
-    fun <T : UltronLifecycleListener> removeGlobalListener(clazz: KClass<T>) {
-        UltronLog.info("Remove Ultron global listener  ${clazz.simpleName}. ")
-        UltronEspressoOperationLifecycle.removeListener(clazz)
-        UltronWebLifecycle.removeListener(clazz)
-        UltronUiAutomatorLifecycle.removeListener(clazz)
-    }
-
-    class Log {
-        companion object {
-            var dateFormat = UltronCommonConfig.logDateFormat
-        }
+    fun apply(block: UltronConfigParams.() -> Unit) {
+        params.block()
+        modify()
     }
 
     private fun modify() {
         Espresso.ACTION_TIMEOUT = params.operationTimeoutMs
         Espresso.ASSERTION_TIMEOUT = params.operationTimeoutMs
-        addGlobalListener(LogLifecycleListener())
-        if (params.logToFile){
+        UltronCommonConfig.addListener(LogLifecycleListener())
+        if (params.logToFile) {
             UltronLog.addLogger(getFileLogger())
         } else {
             UltronLog.removeLogger(UltronLog.fileLogger.id)
@@ -105,14 +90,44 @@ object UltronConfig {
         UltronLog.info("UltronConfig applied with params $params")
     }
 
-    fun applyRecommended(){
-        params = UltronConfigParams()
-        modify()
+    @Deprecated(
+        message = "Listeners storage moved to UltronCommonConfig",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.addListener(Listener)")
+    )
+    fun addGlobalListener(lifecycleListener: UltronLifecycleListener) {
+        UltronLog.info(
+            "Add Ultron global listener ${lifecycleListener.simpleClassName()}. " +
+                    "It's applied for Espresso, EspressoWeb and UiAutomator operations."
+        )
+        UltronCommonConfig.addListener(lifecycleListener)
     }
 
-    fun apply(block: UltronConfigParams.() -> Unit) {
-        params.block()
-        modify()
+    @Deprecated(
+        message = "Listeners storage moved to UltronCommonConfig",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.removeListener(listenerId)")
+    )
+    fun removeGlobalListener(listenerId: String) {
+        UltronLog.info("Remove Ultron global listener with id ${listenerId}. ")
+        UltronCommonConfig.removeListener(listenerId)
+    }
+
+    @Deprecated(
+        message = "Listeners storage moved to UltronCommonConfig",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.removeListener(Listener::class)")
+    )
+    fun <T : UltronLifecycleListener> removeGlobalListener(clazz: KClass<T>) {
+        UltronLog.info("Remove Ultron global listener  ${clazz.simpleName}. ")
+        UltronCommonConfig.removeListener(clazz)
+    }
+
+    class Log {
+        companion object {
+            @Deprecated(
+                message = "Log config moved to UltronCommonConfig",
+                replaceWith = ReplaceWith(expression = "UltronCommonConfig.logDateFormat")
+            )
+            var dateFormat = UltronCommonConfig.logDateFormat
+        }
     }
 
     class Espresso {
@@ -120,17 +135,16 @@ object UltronConfig {
             val baseLayerComponent = DaggerBaseLayerComponent.create()
             val activeRootLister: ActiveRootLister = baseLayerComponent.activeRootLister()
             val uiController: UiController = baseLayerComponent.uiController()
+
             @SuppressLint("RestrictedApi")
             val controlledLooper: ControlledLooper = baseLayerComponent.controlledLooper()
 
-            const val DEFAULT_ACTION_TIMEOUT = 5_000L
-            const val DEFAULT_ASSERTION_TIMEOUT = 5_000L
             const val DEFAULT_RECYCLER_VIEW_LOAD_TIMEOUT = 5_000L
             const val DEFAULT_RECYCLER_VIEW_OPERATION_TIMEOUT = 5_000L
 
-            var ESPRESSO_OPERATION_POLLING_TIMEOUT = 0L //ms
-            var ACTION_TIMEOUT = DEFAULT_ACTION_TIMEOUT
-            var ASSERTION_TIMEOUT = DEFAULT_ASSERTION_TIMEOUT
+            var ESPRESSO_OPERATION_POLLING_TIMEOUT = UltronCommonConfig.Defaults.POLLING_TIMEOUT_MS
+            var ACTION_TIMEOUT = UltronCommonConfig.operationTimeoutMs
+            var ASSERTION_TIMEOUT = UltronCommonConfig.operationTimeoutMs
             var RECYCLER_VIEW_LOAD_TIMEOUT = DEFAULT_RECYCLER_VIEW_LOAD_TIMEOUT
             var RECYCLER_VIEW_OPERATIONS_TIMEOUT = DEFAULT_RECYCLER_VIEW_OPERATION_TIMEOUT
             var RECYCLER_VIEW_ITEM_SEARCH_LIMIT = -1
@@ -206,8 +220,8 @@ object UltronConfig {
 
     class UiAutomator {
         companion object {
-            var UIAUTOMATOR_OPERATION_POLLING_TIMEOUT = 0L //ms
-            var OPERATION_TIMEOUT = 5_000L
+            var UIAUTOMATOR_OPERATION_POLLING_TIMEOUT = UltronCommonConfig.Defaults.POLLING_TIMEOUT_MS
+            var OPERATION_TIMEOUT = UltronCommonConfig.Defaults.OPERATION_TIMEOUT_MS
 
             var resultAnalyzer: OperationResultAnalyzer = UltronDefaultOperationResultAnalyzer()
 
@@ -274,8 +288,17 @@ object UltronConfig {
 
     class Conditions {
         companion object {
-            var conditionExecutorWrapper: ConditionExecutorWrapper = DefaultConditionExecutorWrapper()
-            var conditionsExecutor: ConditionsExecutor = DefaultConditionsExecutor()
+            @Deprecated(
+                message = "ConditionExecutorWrapper moved to UltronAndroidCommonConfig.",
+                replaceWith = ReplaceWith("UltronAndroidCommonConfig.Conditions.conditionExecutorWrapper")
+            )
+            var conditionExecutorWrapper: ConditionExecutorWrapper = UltronAndroidCommonConfig.Conditions.conditionExecutorWrapper
+
+            @Deprecated(
+                message = "ConditionsExecutor moved to UltronAndroidCommonConfig.",
+                replaceWith = ReplaceWith("UltronAndroidCommonConfig.Conditions.conditionsExecutor")
+            )
+            var conditionsExecutor: ConditionsExecutor =  UltronAndroidCommonConfig.Conditions.conditionsExecutor
         }
     }
 }

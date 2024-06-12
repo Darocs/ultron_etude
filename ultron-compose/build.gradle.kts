@@ -30,7 +30,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":ultron-common"))
+            api(project(":ultron-common"))
             implementation(kotlin("reflect"))
             implementation(libs.kotlin.test)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
@@ -39,7 +39,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(project(":ultron-common"))
+                api(project(":ultron-common"))
                 implementation(Libs.androidXRunner)
                 api(Libs.composeUiTest)
             }

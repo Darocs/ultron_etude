@@ -76,9 +76,9 @@ class UltronEspressoInteraction<T>(
     fun isSuccess(operation: UltronEspressoInteraction<T>.() -> Any): Boolean =
         runCatching { operation() }.isSuccess
 
-    fun getActionTimeout(): Long = timeoutMs ?: com.atiurin.ultron.core.config.UltronConfig.Espresso.ACTION_TIMEOUT
+    fun getActionTimeout(): Long = timeoutMs ?: UltronConfig.Espresso.ACTION_TIMEOUT
 
-    fun getAssertionTimeout(): Long = timeoutMs ?: com.atiurin.ultron.core.config.UltronConfig.Espresso.ASSERTION_TIMEOUT
+    fun getAssertionTimeout(): Long = timeoutMs ?: UltronConfig.Espresso.ASSERTION_TIMEOUT
 
     fun withResultHandler(resultHandler: (EspressoOperationResult<UltronEspressoOperation>) -> Unit): UltronEspressoInteraction<T> {
         return UltronEspressoInteraction(
@@ -855,10 +855,10 @@ class UltronEspressoInteraction<T>(
     )
 
     fun getActionResultHandler() =
-        this.resultHandler ?: com.atiurin.ultron.core.config.UltronConfig.Espresso.ViewActionConfig.resultHandler
+        this.resultHandler ?: UltronConfig.Espresso.ViewActionConfig.resultHandler
 
     fun getAssertionResultHandler() =
-        this.resultHandler ?: com.atiurin.ultron.core.config.UltronConfig.Espresso.ViewAssertionConfig.resultHandler
+        this.resultHandler ?: UltronConfig.Espresso.ViewAssertionConfig.resultHandler
 
     fun executeAction(operation: UltronEspressoOperation) =
         UltronEspressoOperationLifecycle.execute(

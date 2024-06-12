@@ -6,7 +6,7 @@ import com.atiurin.ultron.utils.isVisible
 import com.atiurin.ultron.utils.runOnUiThread
 
 fun getRootViewsList(): List<Root> = runOnUiThread {
-    com.atiurin.ultron.core.config.UltronConfig.Espresso.activeRootLister.listActiveRoots()
+    UltronConfig.Espresso.activeRootLister.listActiveRoots()
 }
 
 fun getVisibleRootViews(): List<Root> = getRootViewsList().filter { it.decorView.isVisible }

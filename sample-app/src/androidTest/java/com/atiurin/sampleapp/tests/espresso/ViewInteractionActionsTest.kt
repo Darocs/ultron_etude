@@ -32,7 +32,7 @@ class ViewInteractionActionsTest : UiElementsTest() {
         val startTime = SystemClock.elapsedRealtime()
         val result = page.notExistElement.isSuccess { isDisplayed() }
         val endTime = SystemClock.elapsedRealtime()
-        Assert.assertTrue(endTime - startTime >= com.atiurin.ultron.core.config.UltronConfig.Espresso.ASSERTION_TIMEOUT)
+        Assert.assertTrue(endTime - startTime >= UltronConfig.Espresso.ASSERTION_TIMEOUT)
         Assert.assertFalse(result)
     }
 

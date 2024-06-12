@@ -1,6 +1,6 @@
 package com.atiurin.ultron.core.common
 
-import com.atiurin.ultron.config.UltronCommonConfig
+import com.atiurin.ultron.core.config.UltronCommonConfig
 import com.atiurin.ultron.listeners.AbstractListenersContainer
 import com.atiurin.ultron.listeners.UltronLifecycleListener
 

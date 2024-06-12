@@ -1,6 +1,6 @@
 package com.atiurin.ultron.core.compose.config
 
-import com.atiurin.ultron.config.UltronCommonConfig
+import com.atiurin.ultron.core.config.UltronCommonConfig
 import com.atiurin.ultron.core.common.Operation
 import com.atiurin.ultron.core.common.OperationResult
 import com.atiurin.ultron.core.common.OperationResultAnalyzer
@@ -18,8 +18,18 @@ import com.atiurin.ultron.listeners.UltronLifecycleListener
 import com.atiurin.ultron.log.UltronLog
 
 object UltronComposeConfig {
+    init {
+        UltronCommonConfig.operationsExcludedFromListeners.addAll(
+            listOf(ComposeOperationType.GET_LIST_ITEM, ComposeOperationType.GET_LIST_ITEM_CHILD)
+        )
+        UltronCommonConfig.addListener(LogLifecycleListener())
+    }
     const val DEFAULT_LAZY_COLUMN_OPERATIONS_TIMEOUT = 10_000L
-    const val DEFAULT_OPERATION_TIMEOUT = 5_000L
+    @Deprecated(
+        message = "Default moved to UltronCommonConfig.Defaults",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.Defaults.OPERATION_TIMEOUT_MS")
+    )
+    const val DEFAULT_OPERATION_TIMEOUT = UltronCommonConfig.Defaults.OPERATION_TIMEOUT_MS
 
     var params: UltronComposeConfigParams = UltronComposeConfigParams()
 
@@ -58,24 +68,21 @@ object UltronComposeConfig {
         UltronException::class,
     )
 
+    @Deprecated(
+        message = "Listeners storage moved to UltronCommonConfig",
+        replaceWith = ReplaceWith(expression = "UltronCommonConfig.addListener(Listener)")
+    )
     fun addListener(listener: UltronLifecycleListener) {
         UltronLog.info("Add UltronComposeOperationLifecycle listener ${listener.simpleClassName()}")
-        UltronComposeOperationLifecycle.addListener(listener)
-    }
-
-    private fun modify() {
-        addListener(LogLifecycleListener())
-        UltronCommonConfig.operationsExcludedFromListeners.addAll(listOf(ComposeOperationType.GET_LIST_ITEM, ComposeOperationType.GET_LIST_ITEM_CHILD))
-        UltronLog.info("UltronComposeConfig applied with params $params}")
+        UltronCommonConfig.addListener(listener)
     }
 
     fun applyRecommended() {
         params = UltronComposeConfigParams()
-        modify()
     }
 
     fun apply(block: UltronComposeConfigParams.() -> Unit) {
         params.block()
-        modify()
+        UltronLog.info("UltronComposeConfig applied with params $params}")
     }
 }

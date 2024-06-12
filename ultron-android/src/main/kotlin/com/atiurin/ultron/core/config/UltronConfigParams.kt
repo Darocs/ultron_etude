@@ -1,9 +1,8 @@
 package com.atiurin.ultron.core.config
 
-import com.atiurin.ultron.core.config.UltronConfig.DEFAULT_OPERATION_TIMEOUT_MS
-
 data class UltronConfigParams(
     var accelerateUiAutomator: Boolean = true,
-    var logToFile: Boolean = true,
-    var operationTimeoutMs: Long = DEFAULT_OPERATION_TIMEOUT_MS
+    @Deprecated("Use global setting UltronCommonConfig.logToFile", ReplaceWith("UltronCommonConfig.logToFile"))
+    var logToFile: Boolean = UltronCommonConfig.logToFile,
+    var operationTimeoutMs: Long = UltronCommonConfig.operationTimeoutMs
 )

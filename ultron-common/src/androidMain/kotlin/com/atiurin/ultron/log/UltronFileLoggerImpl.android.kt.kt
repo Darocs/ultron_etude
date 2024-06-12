@@ -1,7 +1,7 @@
 package com.atiurin.ultron.log
 
 import android.os.Build
-import com.atiurin.ultron.config.UltronCommonConfig
+import com.atiurin.ultron.core.config.UltronCommonConfig
 import com.atiurin.ultron.extensions.clearContent
 import com.atiurin.ultron.utils.createCacheFile
 import java.io.File

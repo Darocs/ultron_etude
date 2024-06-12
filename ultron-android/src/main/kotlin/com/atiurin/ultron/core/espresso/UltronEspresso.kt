@@ -106,7 +106,7 @@ object UltronEspresso {
     @Deprecated("It doesn't support withAssertion(). Consider usage of UltronEspressoInteraction().executeAssertion() instead")
     fun executeAssertion(
         operation: UltronEspressoOperation,
-        resultHandler: (EspressoOperationResult<UltronEspressoOperation>) -> Unit = com.atiurin.ultron.core.config.UltronConfig.Espresso.ViewAssertionConfig.resultHandler
+        resultHandler: (EspressoOperationResult<UltronEspressoOperation>) -> Unit = UltronConfig.Espresso.ViewAssertionConfig.resultHandler
     ) {
         UltronEspressoOperationLifecycle.execute(EspressoAssertionExecutor(operation), resultHandler)
     }

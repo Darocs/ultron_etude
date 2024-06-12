@@ -23,17 +23,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":ultron-common"))
+    api(project(":ultron-common"))
     implementation(Libs.kotlinReflect)
     implementation(Libs.kotlinStdlib)
     implementation(Libs.recyclerView)
     api(Libs.espressoCore)
     api(Libs.espressoContrib)
     api(Libs.espressoWeb)
-    api(Libs.uiautomator)
     api(Libs.accessibility)
     api(Libs.hamcrestCore)
-    testImplementation(Libs.junit)
 }
 
 tasks {

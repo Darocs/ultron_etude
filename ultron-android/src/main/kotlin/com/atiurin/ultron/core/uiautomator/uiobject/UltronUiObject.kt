@@ -24,8 +24,8 @@ import org.hamcrest.Matchers
 class UltronUiObject internal constructor(
     private val uiObjectProviderBlock: () -> UiObject,
     private val selectorDesc: String,
-    private val resultHandler: (UiAutomatorOperationResult<UiAutomatorUiSelectorOperation>) -> Unit = com.atiurin.ultron.core.config.UltronConfig.UiAutomator.UiObjectConfig.resultHandler,
-    private val timeoutMs: Long = com.atiurin.ultron.core.config.UltronConfig.UiAutomator.OPERATION_TIMEOUT,
+    private val resultHandler: (UiAutomatorOperationResult<UiAutomatorUiSelectorOperation>) -> Unit = UltronConfig.UiAutomator.UiObjectConfig.resultHandler,
+    private val timeoutMs: Long = UltronConfig.UiAutomator.OPERATION_TIMEOUT,
     private val assertion: OperationAssertion = EmptyOperationAssertion(),
     val elementInfo: ElementInfo = DefaultElementInfo()
 ) {
@@ -676,7 +676,7 @@ class UltronUiObject internal constructor(
         fun uiResId(@IntegerRes resourceId: Int): UltronUiObject {
             val uiSelector = uiSelector(resourceId)
             return UltronUiObject(
-                { com.atiurin.ultron.core.config.UltronConfig.UiAutomator.uiDevice.findObject(uiSelector) },
+                { UltronConfig.UiAutomator.uiDevice.findObject(uiSelector) },
                 uiSelector.toString()
             )
         }
@@ -689,7 +689,7 @@ class UltronUiObject internal constructor(
         @JvmStatic
         fun ui(uiSelector: UiSelector): UltronUiObject {
             return UltronUiObject(
-                { com.atiurin.ultron.core.config.UltronConfig.UiAutomator.uiDevice.findObject(uiSelector) },
+                { UltronConfig.UiAutomator.uiDevice.findObject(uiSelector) },
                 uiSelector.toString()
             )
         }

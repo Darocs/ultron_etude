@@ -1,6 +1,6 @@
 package com.atiurin.ultron.listeners
 
-import com.atiurin.ultron.config.UltronCommonConfig
+import com.atiurin.ultron.core.config.UltronCommonConfig
 
 
 fun <T> executeWithoutListeners(block: () -> T): T {

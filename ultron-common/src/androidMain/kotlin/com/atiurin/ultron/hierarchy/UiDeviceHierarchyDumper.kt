@@ -1,10 +1,12 @@
 package com.atiurin.ultron.hierarchy
 
-import com.atiurin.ultron.core.config.UltronConfig.UiAutomator.Companion.uiDevice
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import com.atiurin.ultron.log.UltronLog
 import java.io.File
 
 class UiDeviceHierarchyDumper : HierarchyDumper {
+    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     override fun dumpFullWindowHierarchy(file: File): HierarchyDumpResult {
         var isSuccess = false
         runCatching {

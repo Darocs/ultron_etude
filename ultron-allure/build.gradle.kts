@@ -30,13 +30,13 @@ android {
     }
 }
 dependencies {
-    implementation(project(":ultron-android"))
-    implementation(project(":ultron-common"))
     implementation(Libs.kotlinStdlib)
+    api(project(":ultron-common"))
     api(Libs.allureAndroid)
     api(Libs.allureCommon)
     api(Libs.allureModel)
     api(Libs.allureJunit4)
+    api(Libs.espressoCore)
 }
 
 tasks {

@@ -1,6 +1,6 @@
 package com.atiurin.ultron.testlifecycle.setupteardown
 
-import com.atiurin.ultron.core.config.UltronConfig
+import com.atiurin.ultron.core.config.UltronAndroidCommonConfig
 import org.junit.internal.AssumptionViolatedException
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -27,7 +27,7 @@ abstract class ConditionRule(open val name: String) : TestRule {
     private val conditionCounter = AtomicInteger(0)
     internal val conditions = mutableListOf<Condition>()
 
-    open var conditionsExecutor: ConditionsExecutor = com.atiurin.ultron.core.config.UltronConfig.Conditions.conditionsExecutor
+    open var conditionsExecutor: ConditionsExecutor = UltronAndroidCommonConfig.Conditions.conditionsExecutor
 
     open fun add(key: String = getCommonKey(), name: String = "", actions: () -> Unit) = apply {
         if (key.contains(COMMON_CONDITION_KEY)) {

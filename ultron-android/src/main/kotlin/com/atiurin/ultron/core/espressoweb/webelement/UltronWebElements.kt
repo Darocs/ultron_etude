@@ -82,7 +82,7 @@ class UltronWebElements(
             name = "WebElementsList(${locator.type} = '$matcher') findMultipleElements",
             type = EspressoWebOperationType.WEB_FIND_MULTIPLE_ELEMENTS,
             description = "WebElementsList(${locator.type} = '$matcher') findMultipleElements during $timeoutMs ms",
-            timeoutMs = timeoutMs ?: com.atiurin.ultron.core.config.UltronConfig.Espresso.ACTION_TIMEOUT,
+            timeoutMs = timeoutMs ?: UltronConfig.Espresso.ACTION_TIMEOUT,
             resultHandler as (WebOperationResult<WebInteractionOperation<List<ElementReference>>>) -> Unit
         )
     }
