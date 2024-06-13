@@ -11,5 +11,6 @@ class IndexComposeItemExecutor(
         ultronComposeList.scrollToIndex(index)
     }
     override fun getItemInteraction() : UltronComposeSemanticsNodeInteraction = ultronComposeList.onVisibleItem(index)
-    override fun getItemChildInteraction(childMatcher: SemanticsMatcher): UltronComposeSemanticsNodeInteraction = ultronComposeList.onVisibleItemChild(index, childMatcher)
+    override fun getItemChildInteraction(childMatcher: SemanticsMatcher): UltronComposeSemanticsNodeInteraction =
+        ultronComposeList.onVisibleItemChild(index, childMatcher)
 }
