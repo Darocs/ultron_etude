@@ -24,6 +24,8 @@ class UltronComposeList(
     private val itemSearchLimit: Int = UltronComposeConfig.params.lazyColumnItemSearchLimit,
     private var operationTimeoutMs: Long = UltronComposeConfig.params.lazyColumnOperationTimeoutMs
 ) {
+    private val itemChildInteractionProvider = getItemChildInteractionProvider()
+
     open fun withTimeout(timeoutMs: Long) =
         UltronComposeList(
             listMatcher = listMatcher,
@@ -71,6 +73,32 @@ class UltronComposeList(
      */
     fun lastVisibleItem() = visibleItem(getInteraction().execute { it.fetchSemanticsNode().children.lastIndex })
 
+    fun onItemChild(itemMatcher: SemanticsMatcher, childMatcher: SemanticsMatcher): UltronComposeSemanticsNodeInteraction =
+        UltronComposeSemanticsNodeInteraction(
+            getInteraction()
+                .execute(
+                    UltronComposeOperationParams(
+                        operationName = "Get item '${itemMatcher.description}' child '${childMatcher.description}' in list '${getInteraction().elementInfo.name}'",
+                        operationDescription = "Get Compose list item '${itemMatcher.description}' child '${childMatcher.description}' in list '${getInteraction().elementInfo.name}'",
+                        operationType = ComposeOperationType.GET_LIST_ITEM_CHILD
+                    )
+                ) { listInteraction ->
+                    itemChildInteractionProvider.onItemChild(listMatcher, itemMatcher, childMatcher, useUnmergedTree).invoke()
+                }
+        )
+
+
+    fun onVisibleItemChild(index: Int, childMatcher: SemanticsMatcher) = UltronComposeSemanticsNodeInteraction(
+        getInteraction().execute(
+            UltronComposeOperationParams(
+                operationName = "Get child '${childMatcher.description}' of visible item at index $index in list '${getInteraction().elementInfo.name}'",
+                operationDescription = "Get Compose list child '${childMatcher.description}' of visible item at index $index in list '${getInteraction().elementInfo.name}'",
+                operationType = ComposeOperationType.GET_LIST_ITEM_CHILD
+            )
+        ) { listInteraction ->
+            itemChildInteractionProvider.onVisibleItemChild(listMatcher, index, childMatcher, useUnmergedTree).invoke()
+        }
+    )
 
     inline fun <reified T : UltronComposeListItem> getItem(matcher: SemanticsMatcher): T {
         return UltronComposeListItem.getInstance(this, matcher)
@@ -243,6 +271,8 @@ class UltronComposeList(
     @Deprecated("Use getInteraction() instead", ReplaceWith("getInteraction()"))
     fun getMatcher() = getInteraction()
 }
+
+
 
 fun composeList(
     listMatcher: SemanticsMatcher,

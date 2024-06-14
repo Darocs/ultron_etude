@@ -1,7 +1,7 @@
 package com.atiurin.ultron.core.compose.operation
 
 import androidx.compose.ui.test.SemanticsMatcher
-import com.atiurin.ultron.core.compose.ComposeRuleContainer.getComposeRule
+import com.atiurin.ultron.core.compose.SemanticsNodeInteractionProviderContainer
 import com.atiurin.ultron.core.compose.nodeinteraction.UltronComposeSemanticsNodeInteraction
 
 class UltronComposeCollectionInteraction(
@@ -14,7 +14,9 @@ class UltronComposeCollectionInteraction(
         }
     }
 
-    fun get(index: Int) = UltronComposeSemanticsNodeInteraction(getComposeRule().onAllNodes(matcher, useUnmergedTree)[index])
+    fun get(index: Int) = UltronComposeSemanticsNodeInteraction(
+        SemanticsNodeInteractionProviderContainer.getProvider().onAllNodes(matcher, useUnmergedTree)[index]
+    )
 
-    fun fetchSemanticNodes() = getComposeRule().onAllNodes(matcher, useUnmergedTree).fetchSemanticsNodes()
+    fun fetchSemanticNodes() = SemanticsNodeInteractionProviderContainer.getProvider().onAllNodes(matcher, useUnmergedTree).fetchSemanticsNodes()
 }
