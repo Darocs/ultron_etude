@@ -10,9 +10,6 @@ class DesktopExampleTest {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun myTest() = runComposeUiTest {
-        // Declares a mock UI to demonstrate API calls
-        //
-        // Replace with your own declarations to test the code of your project
         setContent {
             var text by remember { mutableStateOf("Hello") }
             Text(

@@ -7,6 +7,7 @@ compose-compiler = "1.5.4"
 compose-material3 = "1.2.1"
 androidx-activityCompose = "1.9.0"
 kotlinxDatetime = "0.6.0"
+compose-plugin = "1.6.10"
 okio = "3.9.0"
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -17,7 +18,8 @@ androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
-compose-plugin = "1.6.10"
+androidx-lifecycle = "2.8.0"
+androidx-navigation = "2.7.0-alpha06"
 junit = "4.13.2"
 ktor = "2.3.10"
 monitor = "1.6.1"
@@ -46,6 +48,9 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
+androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
