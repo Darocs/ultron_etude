@@ -13,7 +13,6 @@ android {
     namespace = "com.atiurin.ultron.allure"
     defaultConfig {
         minSdk = 21
-        targetSdk = 34
     }
 
     sourceSets {

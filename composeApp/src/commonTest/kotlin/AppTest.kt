@@ -5,9 +5,11 @@ import repositories.ContactRepository
 import com.atiurin.ultron.core.common.options.TextContainsOption
 import com.atiurin.ultron.core.compose.list.UltronComposeListItem
 import com.atiurin.ultron.core.compose.list.composeList
+import com.atiurin.ultron.core.compose.nodeinteraction.click
 import com.atiurin.ultron.core.compose.runUltronUiTest
 import com.atiurin.ultron.extensions.assertIsDisplayed
 import com.atiurin.ultron.extensions.click
+import com.atiurin.ultron.extensions.withAssertion
 import com.atiurin.ultron.page.Screen
 import kotlin.test.Test
 
@@ -18,11 +20,11 @@ class AppTest {
         setContent {
             App()
         }
-        hasText("Click me!").click()
-        hasTestTag("greeting")
-            .assertIsDisplayed()
-            .assertTextContains("Compose: Hello,", option = TextContainsOption(substring = true))
-
+        hasText("Click me!").withAssertion(){
+            hasTestTag("greeting")
+                .assertIsDisplayed()
+                .assertTextContains("Compose: Hello,", option = TextContainsOption(substring = true))
+        }.click()
     }
 
     @Test

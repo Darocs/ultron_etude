@@ -67,7 +67,6 @@ android {
     namespace = "com.atiurin.ultron.compose"
     defaultConfig {
         minSdk = 16
-        targetSdk = 34
         multiDexEnabled = true
     }
     compileOptions {
@@ -77,7 +76,6 @@ android {
 }
 
 tasks {
-
     val javadoc by creating(Javadoc::class) {
         options {
             this as StandardJavadocDocletOptions
